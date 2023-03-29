@@ -1,16 +1,11 @@
 import SwiftUI
 
-struct ContentView: View {
-    @State private var plaintext = ""
-    @State private var method: Methods = .scrypt
-    enum Methods: String, CaseIterable {
-        case scrypt = "Password"
-        case x25519 = "Public keys"
-    }
+enum Method: String, CaseIterable {
+    case scrypt = "Password"
+    case x25519 = "Public keys"
+}
 
-    @State private var password = ""
-    @State private var recipients: [String] = []
-    @FocusState private var recipientFocused: Bool
+struct ContentView: View {
 
     var body: some View {
         VStack {
@@ -19,69 +14,19 @@ struct ContentView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(height: 100)
 
-            Spacer()
-
-            Form {
-                Section {
-                    Picker("Encryption method", selection: $method.animation()) {
-                        ForEach(Methods.allCases, id: \.self) {
-                            Text($0.rawValue)
-                        }
+            TabView {
+                EncryptView()
+                    .tabItem {
+                        Label("Encrypt", systemImage: "lock")
                     }
-                    .pickerStyle(.segmented)
-
-                    switch method {
-                    case .scrypt :
-                        SecureField("Password", text: $password)
-                    case .x25519:
-                        List($recipients, id: \.self) {
-                            TextField("Recipient", text: $0)
-                                .focused($recipientFocused)
-                        }
-                        Button {
-                            withAnimation {
-                                recipients.append("")
-                            }
-
-                        } label: {
-                            HStack {
-                                Image(systemName: "plus.circle")
-                                    .foregroundColor(.green)
-
-                                Text("Add recipient")
-                            }
-                        }
-                        .task {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                recipientFocused = true
-                            }
-                        }
+                DecryptView()
+                    .tabItem {
+                        Label("Decrypt", systemImage: "lock.open")
                     }
-                    TextField("Plaintext", text: $plaintext, axis: .vertical)
-                        #if os(iOS)
-                        .textInputAutocapitalization(.never)
-                        #endif
-                        .autocorrectionDisabled()
-                        .lineLimit(10)
-
-                }
-                Section {
-                    Button("Encrypt") {
-
+                SettingsView()
+                    .tabItem {
+                        Label("Settings", systemImage: "gear")
                     }
-                    .disabled(plaintext.isEmpty || password.isEmpty)
-                }
-            }
-
-            Spacer()
-
-            HStack {
-                Spacer()
-                Button {
-
-                } label: {
-                    Image(systemName: "gear")
-                }
             }
         }
         .padding()
