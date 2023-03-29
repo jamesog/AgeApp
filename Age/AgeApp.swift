@@ -1,17 +1,16 @@
-//
-//  AgeApp.swift
-//  Age
-//
-//  Created by James O'Gorman on 12/04/2023.
-//
-
 import SwiftUI
 
 @main
 struct AgeApp: App {
+    @State private var loaded = false
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if !loaded {
+                LoadingView(loaded: $loaded)
+            } else {
+                ContentView()
+            }
         }
     }
 }
