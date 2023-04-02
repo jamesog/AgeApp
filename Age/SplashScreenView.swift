@@ -36,7 +36,7 @@ struct SplashScreenView: View {
         }
         .onAppear {
             withAnimation(.easeIn(duration: 0.8)) {
-                maxHeight = 100
+                maxHeight = logoHeight
                 spacer = Spacer()
             }
         }

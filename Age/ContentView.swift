@@ -5,6 +5,8 @@ enum Method: String, CaseIterable {
     case x25519 = "Public keys"
 }
 
+let logoHeight: CGFloat = 100
+
 struct ContentView: View {
 
     var body: some View {
@@ -12,7 +14,7 @@ struct ContentView: View {
             Image("Logo")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(height: 100)
+                .frame(height: logoHeight)
 
             TabView {
                 EncryptView()
