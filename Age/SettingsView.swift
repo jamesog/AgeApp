@@ -16,6 +16,7 @@ extension Key: Comparable {
 
 struct SettingsView: View {
     @State private var keys: [Key] = []
+    @State private var showingCreate = false
 
     var body: some View {
         List {
@@ -27,7 +28,12 @@ struct SettingsView: View {
                 ForEach(Array(keys), id: \.self) { key in
                     Text(key.name)
                 }
-                Button("Create new key") {}
+                Button("Create new key") {
+                    showingCreate.toggle()
+                }
+                .sheet(isPresented: $showingCreate) {
+                    CreateKeyView(keys: $keys)
+                }
             }
 
             Section {

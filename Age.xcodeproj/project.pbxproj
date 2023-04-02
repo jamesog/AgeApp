@@ -19,6 +19,7 @@
 		873C810729E6BDFC00BEBEF6 /* EncryptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873C810429E6BDFC00BEBEF6 /* EncryptView.swift */; };
 		873C810829E6BDFC00BEBEF6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873C810529E6BDFC00BEBEF6 /* SettingsView.swift */; };
 		873C810929E6BDFC00BEBEF6 /* DecryptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873C810629E6BDFC00BEBEF6 /* DecryptView.swift */; };
+		873C810C29E6BFAF00BEBEF6 /* CreateKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873C810A29E6BFAE00BEBEF6 /* CreateKeyView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		873C810429E6BDFC00BEBEF6 /* EncryptView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncryptView.swift; sourceTree = "<group>"; };
 		873C810529E6BDFC00BEBEF6 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		873C810629E6BDFC00BEBEF6 /* DecryptView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecryptView.swift; sourceTree = "<group>"; };
+		873C810A29E6BFAE00BEBEF6 /* CreateKeyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateKeyView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			children = (
 				870B6C0D29E6B9250056AC07 /* Info.plist */,
 				870B6BE329E6B2900056AC07 /* AgeApp.swift */,
+				873C810A29E6BFAE00BEBEF6 /* CreateKeyView.swift */,
 				870B6BE529E6B2900056AC07 /* ContentView.swift */,
 				873C810629E6BDFC00BEBEF6 /* DecryptView.swift */,
 				873C810429E6BDFC00BEBEF6 /* EncryptView.swift */,
@@ -284,6 +287,7 @@
 				873C810929E6BDFC00BEBEF6 /* DecryptView.swift in Sources */,
 				870B6BE629E6B2900056AC07 /* ContentView.swift in Sources */,
 				870B6BE429E6B2900056AC07 /* AgeApp.swift in Sources */,
+				873C810C29E6BFAF00BEBEF6 /* CreateKeyView.swift in Sources */,
 				873C810329E6BD0600BEBEF6 /* SplashScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
