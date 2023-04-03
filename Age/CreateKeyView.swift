@@ -16,7 +16,7 @@ struct CreateKeyView: View {
     }
 
     var body: some View {
-        VStack {
+        NavigationStack {
             Form {
                 Section {
                     TextField("Name", text: $name)
@@ -51,7 +51,11 @@ struct CreateKeyView: View {
                         name = ""
                     }
                     .disabled(generateDisbled)
-
+                }
+            }
+            .navigationBarTitle("Create key", displayMode: .inline)
+            .toolbar {
+                ToolbarItem {
                     Button("Done") {
                         dismiss()
                     }
