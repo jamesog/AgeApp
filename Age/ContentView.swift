@@ -8,6 +8,13 @@ enum Method: String, CaseIterable {
 let logoHeight: CGFloat = 100
 
 struct ContentView: View {
+    @AppStorage("selectedTab") private var selectedTab = Tab.decrypt
+
+    enum Tab: Int {
+        case encrypt
+        case decrypt
+        case settings
+    }
 
     var body: some View {
         VStack {
@@ -16,19 +23,22 @@ struct ContentView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(height: logoHeight)
 
-            TabView {
+            TabView(selection: $selectedTab) {
                 EncryptView()
                     .tabItem {
                         Label("Encrypt", systemImage: "lock")
                     }
+                    .tag(Tab.encrypt)
                 DecryptView()
                     .tabItem {
                         Label("Decrypt", systemImage: "lock.open")
                     }
+                    .tag(Tab.decrypt)
                 SettingsView()
                     .tabItem {
                         Label("Settings", systemImage: "gear")
                     }
+                    .tag(Tab.settings)
             }
         }
         .padding()
