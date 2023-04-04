@@ -29,7 +29,6 @@ struct SplashScreenView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(maxHeight: maxHeight)
-                .padding(.top)
             if let spacer {
                 spacer
             }

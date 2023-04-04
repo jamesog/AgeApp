@@ -5,7 +5,7 @@ enum Method: String, CaseIterable {
     case x25519 = "Public keys"
 }
 
-let logoHeight: CGFloat = 100
+let logoHeight: CGFloat = 80
 
 struct ContentView: View {
     @AppStorage("selectedTab") private var selectedTab = Tab.decrypt
@@ -41,7 +41,6 @@ struct ContentView: View {
                     .tag(Tab.settings)
             }
         }
-        .padding()
     }
 }
 
