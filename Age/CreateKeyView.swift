@@ -45,9 +45,8 @@ struct CreateKeyView: View {
                 Section {
                     Button("Generate key") {
                         generatedIdentity = Age.X25519Identity.generate()
-                        keys.append(
-                            Key(name: name, key: generatedIdentity!.string, createdDate: Date.now))
-                        keys.sort()
+                        Keychain.save(name: name, publicKey: generatedIdentity!.recipient.string, privateKey: generatedIdentity!.string)
+                        keys = Keychain.getKeys()
                         name = ""
                     }
                     .disabled(generateDisbled)

@@ -15,18 +15,24 @@ extension Key: Comparable {
 }
 
 struct SettingsView: View {
-    @State private var keys: [Key] = []
+    @State private var showKey = false
+    @State private var keys: [Key] = Keychain.getKeys()
     @State private var showingCreate = false
 
     var body: some View {
-        List {
-            Section("Keys") {
+        Form {
+            Section {
                 if keys.isEmpty {
                     Text("No keys present.")
                         .font(.footnote)
                 }
                 ForEach(Array(keys), id: \.self) { key in
-                    Text(key.name)
+                    Button(key.name) {
+                        showKey = true
+                    }
+                    .alert(isPresented: $showKey) {
+                        Alert(title: Text("Public Key"), message: Text(key.key))
+                    }
                 }
                 Button("Create new key") {
                     showingCreate.toggle()
@@ -34,6 +40,10 @@ struct SettingsView: View {
                 .sheet(isPresented: $showingCreate) {
                     CreateKeyView(keys: $keys)
                 }
+            } header: {
+                Text("Keys")
+            } footer: {
+                Text("A key pair is needed if you want to share a secret with more than one person or by not using a shared password.")
             }
 
             Section {

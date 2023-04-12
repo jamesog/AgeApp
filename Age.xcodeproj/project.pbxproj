@@ -20,6 +20,7 @@
 		873C810829E6BDFC00BEBEF6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873C810529E6BDFC00BEBEF6 /* SettingsView.swift */; };
 		873C810929E6BDFC00BEBEF6 /* DecryptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873C810629E6BDFC00BEBEF6 /* DecryptView.swift */; };
 		873C810C29E6BFAF00BEBEF6 /* CreateKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873C810A29E6BFAE00BEBEF6 /* CreateKeyView.swift */; };
+		873C810F29E6C31900BEBEF6 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873C810E29E6C31900BEBEF6 /* Keychain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		873C810529E6BDFC00BEBEF6 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		873C810629E6BDFC00BEBEF6 /* DecryptView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecryptView.swift; sourceTree = "<group>"; };
 		873C810A29E6BFAE00BEBEF6 /* CreateKeyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateKeyView.swift; sourceTree = "<group>"; };
+		873C810E29E6C31900BEBEF6 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				870B6BE529E6B2900056AC07 /* ContentView.swift */,
 				873C810629E6BDFC00BEBEF6 /* DecryptView.swift */,
 				873C810429E6BDFC00BEBEF6 /* EncryptView.swift */,
+				873C810E29E6C31900BEBEF6 /* Keychain.swift */,
 				873C810529E6BDFC00BEBEF6 /* SettingsView.swift */,
 				873C810229E6BD0500BEBEF6 /* SplashScreenView.swift */,
 				870B6BE729E6B2910056AC07 /* Assets.xcassets */,
@@ -287,6 +290,7 @@
 				873C810929E6BDFC00BEBEF6 /* DecryptView.swift in Sources */,
 				870B6BE629E6B2900056AC07 /* ContentView.swift in Sources */,
 				870B6BE429E6B2900056AC07 /* AgeApp.swift in Sources */,
+				873C810F29E6C31900BEBEF6 /* Keychain.swift in Sources */,
 				873C810C29E6BFAF00BEBEF6 /* CreateKeyView.swift in Sources */,
 				873C810329E6BD0600BEBEF6 /* SplashScreenView.swift in Sources */,
 			);
