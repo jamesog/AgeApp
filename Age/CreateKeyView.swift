@@ -3,12 +3,12 @@ import AgeKit
 
 struct CreateKeyView: View {
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var keychain: Keychain
     @State private var name = ""
     @State private var generatedIdentity: Age.X25519Identity?
-    @Binding var keys: [Key]
 
     private var names: [String] {
-        keys.map { $0.name }
+        keychain.keys.map { $0.name }
     }
 
     private var generateDisbled: Bool {
@@ -45,8 +45,7 @@ struct CreateKeyView: View {
                 Section {
                     Button("Generate key") {
                         generatedIdentity = Age.X25519Identity.generate()
-                        Keychain.save(name: name, publicKey: generatedIdentity!.recipient.string, privateKey: generatedIdentity!.string)
-                        keys = Keychain.getKeys()
+                        keychain.save(name: name, publicKey: generatedIdentity!.recipient.string, privateKey: generatedIdentity!.string)
                         name = ""
                     }
                     .disabled(generateDisbled)
@@ -67,6 +66,7 @@ struct CreateKeyView: View {
 struct CreateKeyView_Previews: PreviewProvider {
     static var previews: some View {
         @State var identities: [Key] = []
-        CreateKeyView(keys: $identities)
+        CreateKeyView()
+            .environmentObject(Keychain())
     }
 }

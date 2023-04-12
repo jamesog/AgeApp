@@ -15,18 +15,18 @@ extension Key: Comparable {
 }
 
 struct SettingsView: View {
+    @EnvironmentObject var keychain: Keychain
     @State private var showKey = false
-    @State private var keys: [Key] = Keychain.getKeys()
     @State private var showingCreate = false
 
     var body: some View {
         Form {
             Section {
-                if keys.isEmpty {
+                if keychain.keys.isEmpty {
                     Text("No keys present.")
                         .font(.footnote)
                 }
-                ForEach(Array(keys), id: \.self) { key in
+                ForEach(Array(keychain.keys), id: \.name) { key in
                     Button(key.name) {
                         showKey = true
                     }
@@ -38,7 +38,7 @@ struct SettingsView: View {
                     showingCreate.toggle()
                 }
                 .sheet(isPresented: $showingCreate) {
-                    CreateKeyView(keys: $keys)
+                    CreateKeyView()
                 }
             } header: {
                 Text("Keys")
@@ -57,5 +57,6 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
+            .environmentObject(Keychain())
     }
 }

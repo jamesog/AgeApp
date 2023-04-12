@@ -1,12 +1,15 @@
 import Foundation
 
-enum Keychain {
+@MainActor
+class Keychain: ObservableObject {
     static let ageKeychainLabel = "Age"
 
-    static func getKeys() -> [Key] {
+    @Published var keys: [Key] = []
+
+    func loadKeys() {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrLabel as String: ageKeychainLabel,
+            kSecAttrLabel as String: Self.ageKeychainLabel,
             kSecReturnAttributes as String: true,
             kSecMatchLimit as String: kSecMatchLimitAll,
         ]
@@ -19,11 +22,11 @@ enum Keychain {
             } else {
                 debugPrint("\(#file)[\(#line)]: failed to query Keychain: unknown error code \(status)")
             }
-            return []
+            return
         }
         guard let items = result as? [[String: Any]] else {
             debugPrint("\(#file)[\(#line)]: Couldn't convert result")
-            return []
+            return
         }
         var keys: [Key] = []
         for item in items {
@@ -38,13 +41,13 @@ enum Keychain {
             keys.append(Key(name: name, key: pubKey, createdDate: Date.now))
         }
         keys.sort()
-        return keys
+        self.keys = keys
     }
 
-    static func save(name: String, publicKey: String, privateKey: String) {
+    func save(name: String, publicKey: String, privateKey: String) {
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrLabel as String: ageKeychainLabel,
+            kSecAttrLabel as String: Self.ageKeychainLabel,
             kSecAttrAccount as String: name,
             kSecAttrService as String: publicKey,
             kSecValueData as String: privateKey.data(using: .ascii)!,
@@ -59,17 +62,24 @@ enum Keychain {
             }
             return
         }
+        loadKeys()
     }
 
-    static func delete(name: String) {
+    func delete(name: String) {
         let query: [String: Any] = [
-            kSecClass as String: kSecClassKey,
-            kSecAttrLabel as String: ageKeychainLabel,
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrLabel as String: Self.ageKeychainLabel,
+            kSecAttrAccount as String: name,
         ]
 
         let status = SecItemDelete(query as CFDictionary)
-        guard status == errSecSuccess else {
-            return
+        if status != errSecSuccess {
+            if let err = SecCopyErrorMessageString(status, nil) {
+                debugPrint("\(#file)[\(#line)]: failed to delete key \(name): \(err)")
+            } else {
+                debugPrint("\(#file)[\(#line)]: failed to delete key \(name): unknown error code \(status)")
+            }
         }
+        loadKeys()
     }
 }

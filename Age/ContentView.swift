@@ -10,6 +10,8 @@ let logoHeight: CGFloat = 80
 struct ContentView: View {
     @AppStorage("selectedTab") private var selectedTab = Tab.decrypt
 
+    @StateObject var keychain = Keychain()
+
     enum Tab: Int {
         case encrypt
         case decrypt
@@ -41,6 +43,7 @@ struct ContentView: View {
                     .tag(Tab.settings)
             }
         }
+        .environmentObject(keychain)
     }
 }
 
