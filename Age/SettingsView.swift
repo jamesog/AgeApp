@@ -16,8 +16,10 @@ struct SettingsView: View {
                     Button(key.name) {
                         showKey = true
                     }
-                    .alert(isPresented: $showKey) {
-                        Alert(title: Text("Public Key"), message: Text(key.key))
+                    .sheet(isPresented: $showKey) {
+                        KeyView(key: key)
+                        .padding()
+                        .presentationDetents([.medium, .large])
                     }
                 }
                 Button("Create new key") {
